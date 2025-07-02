@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sotib olish - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body style="padding-top: 90px;">
+ <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                <li><a href="{% url 'products' %}" class="active">Telefonlar</a></li>
+                <li><a href="{% url 'contact' %}">Aloqa</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                    <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="checkout-header">
+            <div class="container">
+                <h1>Sotib olish</h1>
+                <div class="checkout-steps">
+                    <div class="step active"><span class="step-number">1</span><span class="step-text">Ma'lumotlar</span></div>
+                    <div class="step"><span class="step-number">2</span><span class="step-text">To'lov</span></div>
+                    <div class="step"><span class="step-number">3</span><span class="step-text">Tasdiqlash</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="checkout-content">
+            <div class="container">
+                <div class="checkout-grid">
+                    <div class="checkout-form-section">
+                        <form class="checkout-form" method="post">
+                            {% csrf_token %}
+                            <div class="form-section profile-section">
+                                <h2>👤 Shaxsiy ma'lumotlar</h2>
+                                <div class="profile-avatar" style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+                                    <img src="https://ui-avatars.com/api/?name=User&background=007bff&color=fff&size=64" alt="Profil" style="width:64px;height:64px;border-radius:50%;box-shadow:0 2px 8px #007bff22;">
+                                    <span style="font-weight:600;color:#007bff;">Foydalanuvchi</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="firstName">Ism *</label>
+                                    <input type="text" id="firstName" name="firstName" required placeholder="Ismingiz">
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Familiya *</label>
+                                    <input type="text" id="lastName" name="lastName" required placeholder="Familiyangiz">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Telefon *</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" name="email" required placeholder="you@email.com">
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h2>🚚 Yetkazib berish</h2>
+                                <div class="form-group">
+                                    <label for="address">Manzil *</label>
+                                    <textarea id="address" name="address" rows="2" placeholder="Viloyat, shahar, ko'cha, uy raqami" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="delivery">Yetkazib berish turi</label>
+                                    <select id="delivery" name="delivery">
+                                        <option value="pickup">Do'kondan olish (bepul)</option>
+                                        <option value="delivery">Kuryer orqali (50,000 so'm)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h2>💳 To'lov usuli</h2>
+                                <div class="form-group">
+                                    <label for="payment">To'lov turi</label>
+                                    <select id="payment" name="payment">
+                                        <option value="cash">Naqd</option>
+                                        <option value="card">Karta</option>
+                                        <option value="transfer">Bank o'tkazmasi</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-section">
+                                <h2>📝 Izoh</h2>
+                                <div class="form-group">
+                                    <textarea id="notes" name="notes" rows="2" placeholder="Qo'shimcha ma'lumot (ixtiyoriy)"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="order-btn">🛒 Buyurtma berish</button>
+                        </form>
+                    </div>
+                    <div class="order-summary-section">
+                        <div class="order-summary">
+                            <h2>📦 Buyurtma xulosasi</h2>
+                            <div class="selected-product">
+                                <div class="product-image">
+                                    <img src="{% static 'placeholder.svg' %}" alt="Mahsulot" height="100">
+                                </div>
+                                <div class="product-details">
+                                    <h3>Telefon nomi</h3>
+                                    <p class="product-specs">256GB, Blue</p>
+                                    <div class="product-rating">⭐⭐⭐⭐⭐ (4.9)</div>
+                                </div>
+                                <div class="product-price">
+                                    <span class="price">15,000,000 so'm</span>
+                                </div>
+                            </div>
+                            <div class="price-breakdown">
+                                <div class="price-row"><span>Mahsulot narxi:</span><span>15,000,000 so'm</span></div>
+                                <div class="price-row"><span>Yetkazib berish:</span><span>Bepul</span></div>
+                                <div class="price-row total-row"><span><strong>Jami:</strong></span><span class="total-price"><strong>15,000,000 so'm</strong></span></div>
+                            </div>
+                            <div class="warranty-info">
+                                <h3>🛡️ Kafolat</h3>
+                                <ul>
+                                    <li>2 yil rasmiy kafolat</li>
+                                    <li>Bepul servis</li>
+                                </ul>
+                            </div>
+                            <div class="contact-info">
+                                <h3>📞 Yordam kerakmi?</h3>
+                                <p>Telefon: <a href="tel:+998901234567">+998 90 123 45 67</a></p>
+                                <p>Email: <a href="mailto:support@phoneshop.uz">support@phoneshop.uz</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

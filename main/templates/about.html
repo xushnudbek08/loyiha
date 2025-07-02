@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biz haqimizda - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                <li><a href="{% url 'about' %}" class="active">Biz haqimizda</a></li>
+                <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                <li><a href="{% url 'contact' %}">Aloqa</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                    <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Biz Haqimizda</h1>
+            <p>2018 yildan beri O'zbekistonda eng yaxshi telefonlarni sotib kelmoqdamiz</p>
+        </div>
+    </section>
+
+    <!-- Company Story -->
+    <section class="company-story">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Bizning Hikoyamiz</h2>
+                    <p>PhoneShop 2018 yilda kichik oilaviy biznes sifatida boshlangan. Bizning maqsadimiz odamlarni eng yangi texnologiyalar bilan tanishtirishdir.</p>
+                    <p>Bugungi kunda biz O'zbekistonning eng yirik telefon do'konlaridan biriga aylandik. Bizda 50 dan ortiq telefon modeli mavjud va har kuni yuzlab mijozlarga xizmat ko'rsatamiz.</p>
+                    <p>Biz faqat original va sifatli mahsulotlarni sotamiz. Har bir telefon kafolat bilan birga keladi va bizning mutaxassislarimiz sizga eng yaxshi xizmatni ko'rsatadi.</p>
+                </div>
+                <div class="story-image">
+                    <img src="/placeholder.svg?height=400&width=500" alt="Bizning do'kon">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">🎯</div>
+                    <h3>Bizning Maqsadimiz</h3>
+                    <p>Har bir mijozga eng yaxshi telefon va xizmatni taqdim etish. Biz mijozlarimizning ehtiyojlarini tushunib, ularga eng mos keladigan telefonni topishda yordam beramiz.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">🚀</div>
+                    <h3>Bizning Vizyonimiz</h3>
+                    <p>O'zbekistondagi eng ishonchli va mashhur telefon do'koni bo'lish. Biz texnologiya sohasida yetakchi o'rinni egallashni maqsad qilganmiz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values">
+        <div class="container">
+            <h2>Bizning Qadriyatlarimiz</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">💎</div>
+                    <h3>Sifat</h3>
+                    <p>Faqat original va yuqori sifatli telefonlarni sotamiz</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Ishonch</h3>
+                    <p>Mijozlarimiz bilan halol va ochiq munosabatda bo'lamiz</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>Tezlik</h3>
+                    <p>Tez va sifatli xizmat ko'rsatishga harakat qilamiz</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">💰</div>
+                    <h3>Adolatli Narx</h3>
+                    <p>Eng yaxshi narxlarni taklif qilamiz</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team">
+        <div class="container">
+            <h2>Bizning Jamoa</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <h3>Alisher Karimov</h3>
+                    <p>Bosh direktor</p>
+                    <p>10 yillik tajribaga ega telefon savdosi mutaxassisi</p>
+                </div>
+                <div class="team-member">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <h3>Nilufar Rahimova</h3>
+                    <p>Savdo menejeri</p>
+                    <p>Mijozlar bilan ishlash bo'yicha ekspert</p>
+                </div>
+                <div class="team-member">
+                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <h3>Bobur Toshmatov</h3>
+                    <p>Texnik mutaxassis</p>
+                    <p>Telefonlarni ta'mirlash va texnik yordam</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section class="achievements">
+        <div class="container">
+            <h2>Bizning Yutuqlarimiz</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-number">6</div>
+                    <p>Yillik Tajriba</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">10,000+</div>
+                    <p>Sotilgan Telefonlar</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">5,000+</div>
+                    <p>Mamnun Mijozlar</p>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">50+</div>
+                    <p>Telefon Modellari</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

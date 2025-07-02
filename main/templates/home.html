@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosh Sahifa - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}" class="active">Bosh sahifa</a></li>
+                <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                <li><a href="{% url 'contact' %}">Aloqa</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                    <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Eng Yangi Telefonlar!</h1>
+            <p>iPhone, Samsung, Xiaomi va boshqa mashhur brendlarning eng so'nggi modellari</p>
+            <a href="{% url 'products'%}" class="cta-button">Telefonlarni Ko'rish</a>
+        </div>
+        <div class="hero-image">
+            <img src="/placeholder.svg?height=400&width=600" alt="Telefonlar">
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>Bizning Afzalliklarimiz</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Tez Yetkazib Berish</h3>
+                    <p>24 soat ichida buyurtmangizni yetkazib beramiz</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Kafolat</h3>
+                    <p>Barcha telefonlarga 2 yillik kafolat beramiz</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Eng Yaxshi Narxlar</h3>
+                    <p>Bozordagi eng arzon narxlarni taklif qilamiz</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Ta'mirlash Xizmati</h3>
+                    <p>Professional ta'mirlash va texnik yordam</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Phones -->
+    <section class="popular-phones">
+        <div class="container">
+            <h2>Mashhur Telefonlar</h2>
+            <div class="phones-grid">
+                <div class="phone-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOogbkerZY7zEbyggVNO6miPLE3LPjDh4s5g&s" alt="iPhone 15">
+                    <h3>iPhone 15 Pro</h3>
+                    <div class="price">15,000,000 so'm</div>
+                    <a href="{% url 'products'%}" class="view-btn">Ko'rish</a>
+                </div>
+                <div class="phone-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaWoVVDBzU6PISIDEB1MNwQ9EKk_Xdk_UySw&s" alt="Samsung Galaxy">
+                    <h3>Samsung Galaxy S24</h3>
+                    <div class="price">12,000,000 so'm</div>
+                    <a href="{% url 'products'%}" class="view-btn">Ko'rish</a>
+                </div>
+                <div class="phone-card">
+                    <img src="https://files.refurbed.com/ii/xiaomi-14-1713250616677799688.jpg?t=resize&h=630&w=1200" alt="Xiaomi">
+                    <h3>Xiaomi 14 Pro</h3>
+                    <div class="price">8,000,000 so'm</div>
+                    <a href="{% url 'products'%}" class="view-btn">Ko'rish</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Sotilgan Telefonlar</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5,000+</h3>
+                    <p>Mamnun Mijozlar</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Telefon Modellari</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Mijozlar Xizmati</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

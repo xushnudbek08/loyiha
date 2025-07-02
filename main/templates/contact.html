@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aloqa - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                <li><a href="{% url 'contact' %}" class="active">Aloqa</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                    <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Biz Bilan Bog'laning</h1>
+            <p>Savollaringiz bormi? Biz sizga yordam berishdan mamnunmiz!</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Xabar Yuborish</h2>
+                    <form class="contact-form" action="#" method="POST">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Ism</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Familiya</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email manzil</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Telefon raqam</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Mavzu</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Mavzuni tanlang</option>
+                                <option value="product">Telefon haqida savol</option>
+                                <option value="order">Buyurtma holati</option>
+                                <option value="warranty">Kafolat masalalari</option>
+                                <option value="repair">Ta'mirlash xizmati</option>
+                                <option value="complaint">Shikoyat</option>
+                                <option value="other">Boshqa</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Xabar</label>
+                            <textarea id="message" name="message" rows="6" placeholder="Xabaringizni yozing..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Xabar Yuborish</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-section">
+                    <h2>Aloqa Ma'lumotlari</h2>
+                    
+                    <div class="contact-info-card">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h3>Telefon</h3>
+                                <p>+998 90 123 45 67</p>
+                                <p>+998 91 234 56 78</p>
+                                <small>Dushanba-Shanba: 9:00-20:00</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>info@phoneshop.uz</p>
+                                <p>support@phoneshop.uz</p>
+                                <small>24 soat ichida javob beramiz</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h3>Manzil</h3>
+                                <p>Amir Temur ko'chasi, 15-uy</p>
+                                <p>Toshkent, O'zbekiston</p>
+                                <small>Metro: Amir Temur Hiyoboni</small>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h3>Ish Vaqti</h3>
+                                <p>Dushanba - Juma: 9:00 - 20:00</p>
+                                <p>Shanba: 9:00 - 18:00</p>
+                                <p>Yakshanba: 10:00 - 16:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="social-media">
+                        <h3>Ijtimoiy Tarmoqlar</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link telegram">Telegram</a>
+                            <a href="#" class="social-link instagram">Instagram</a>
+                            <a href="#" class="social-link facebook">Facebook</a>
+                            <a href="#" class="social-link youtube">YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Bizning Joylashuvimiz</h2>
+            <div class="map-placeholder">
+                <div class="map-content">
+                    <div class="map-icon">🗺️</div>
+                    <p>Xarita bu yerda ko'rsatiladi</p>
+                    <p>Amir Temur ko'chasi, 15-uy, Toshkent</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Tez-tez So'raladigan Savollar</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Telefonlar original ekanligiga qanday ishonch hosil qilsam bo'ladi?</h3>
+                    <p>Biz faqat rasmiy distribyutorlardan telefon sotib olamiz va har bir telefon bilan birga kafolat guvohnomasi beramiz.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Yetkazib berish qancha vaqt oladi?</h3>
+                    <p>Toshkent bo'ylab 1-2 kun ichida, boshqa viloyatlarga 3-5 kun ichida yetkazib beramiz.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Telefon kafolati qancha muddat?</h3>
+                    <p>Barcha telefonlarga 2 yillik rasmiy kafolat beramiz. Kafolat muddati ichida bepul ta'mirlash xizmati mavjud.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>To'lov usullari qanday?</h3>
+                    <p>Naqd pul, plastik karta, bank o'tkazmasi va muddatli to'lov imkoniyatlari mavjud.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,138 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefonlar - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                <li><a href="{% url 'products' %}" class="active">Telefonlar</a></li>
+                <li><a href="{% url 'contact' %}">Aloqa</a></li>
+            </ul>
+            <div class="auth-buttons">
+                {% if user.is_authenticated %}
+                    <span class="user-name">{{ user.username }}</span>
+                    <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                    <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <section class="products-header">
+        <div class="container">
+            <h1>Telefonlar Katalogi</h1>
+            <p>Eng yangi va mashhur telefon modellarini toping</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <form method="get" class="filters-form" style="display: flex; gap: 20px; align-items: center;">
+                <div class="filter-group">
+                    <label for="brand">Brend:</label>
+                    <select id="brand" name="category" onchange="this.form.submit()">
+                        <option value="all" {% if selected_category == "all" or not selected_category %}selected{% endif %}>Barcha brendlar</option>
+                        {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id|stringformat:"s" == selected_category %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="color">Rangi:</label>
+                    <select id="color" name="color" onchange="this.form.submit()">
+                        <option value="all" {% if selected_color == "all" or not selected_color %}selected{% endif %}>Barcha ranglar</option>
+                        {% for c in colors %}
+                            <option value="{{ c.id }}" {% if c.id|stringformat:"s" == selected_color %}selected{% endif %}>{{ c.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="ssd">Xotira:</label>
+                    <select id="ssd" name="ssd" onchange="this.form.submit()">
+                        <option value="all" {% if selected_ssd == "all" or not selected_ssd %}selected{% endif %}>Barcha xotiralar</option>
+                        {% for s in ssds %}
+                            <option value="{{ s.id }}" {% if s.id|stringformat:"s" == selected_ssd %}selected{% endif %}>{{ s.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- Products Grid -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-grid">
+                {% for product in products %}
+                    <div class="product-card">
+                        <div class="product-image">
+                            {% if product.image %}
+                                <img width="20px" src="{{ product.image.url }}" alt="{{ product.name }}">
+                            {% else %}
+                                <img src="{% static 'placeholder.svg' %}" alt="{{ product.name }}">
+                            {% endif %}
+                            <div class="product-badge">Yangi</div>
+                        </div>
+                        <div class="product-info">
+                            <h3>{{ product.name }}</h3>
+                            <p>Xotira:{{ product.ssd}}gb</p>
+                            <p class="product-specs">{{ product.description }}</p>
+                            <div class="product-price">
+                                <span class="current-price">{{ product.price }} so'm</span>
+                            </div>
+                            <a href="{% url 'checkout' %}" class="buy-btn">Xarid qilish</a>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>Mahsulot topilmadi</p>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

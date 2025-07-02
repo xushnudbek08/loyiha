@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechPhone - Telefon Do'koni</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>TechPhone</span>
+                </div>
+                <div class="nav-menu">
+                    <a href="{% url 'home' %}" class="nav-link">Bosh sahifa</a>
+                    <a href="{% url 'about' %}" class="nav-link">Biz haqimizda</a>
+                    <a href="{% url 'contact' %}" class="nav-link">Aloqa</a>
+                    <a href="{% url 'login' %}" class="nav-link">Kirish</a>
+                    <a href="{% url 'register' %}" class="nav-link">Ro'yxatdan o'tish</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Landing Hero -->
+    <section class="landing-hero">
+        <div class="landing-content">
+            <div class="landing-text">
+                <h1>O'zbekistondagi Eng Yaxshi Telefon Do'koni</h1>
+                <p>iPhone, Samsung, Xiaomi va boshqa mashhur brendlarning eng so'nggi modellari</p>
+                <div class="landing-features">
+                    <div class="landing-feature">
+                        <span class="feature-icon">🚚</span>
+                        <span>Tez yetkazib berish</span>
+                    </div>
+                    <div class="landing-feature">
+                        <span class="feature-icon">🛡️</span>
+                        <span>2 yillik kafolat</span>
+                    </div>
+                    <div class="landing-feature">
+                        <span class="feature-icon">💰</span>
+                        <span>Eng yaxshi narxlar</span>
+                    </div>
+                </div>
+                <div class="landing-buttons">
+                    <a href="{% url 'home' %}" class="cta-button primary">Saytga Kirish</a>
+                    <a href="{% url 'products' %}" class="cta-button secondary">Telefonlarni Ko'rish</a>
+                </div>
+            </div>
+            <div class="landing-image">
+                <img src="/placeholder.svg?height=500&width=600" alt="Telefonlar">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats -->
+    <section class="quick-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>10,000+</h3>
+                    <p>Sotilgan Telefonlar</p>
+                </div>
+                <div class="stat-item">
+                    <h3>5,000+</h3>
+                    <p>Mamnun Mijozlar</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+</h3>
+                    <p>Telefon Modellari</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Mijozlar Xizmati</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📱 PhoneShop</h3>
+                    <p>Eng yaxshi telefonlar va xizmatlar</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Sahifalar</h4>
+                    <ul>
+                        <li><a href="{% url 'home'%}">Bosh sahifa</a></li>
+                        <li><a href="{% url 'about'%}">Biz haqimizda</a></li>
+                        <li><a href="{% url 'products'%}">Telefonlar</a></li>
+                        <li><a href="{% url 'contact'%}">Aloqa</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Aloqa</h4>
+                    <p>📞 +998 90 123 45 67</p>
+                    <p>📧 info@phoneshop.uz</p>
+                    <p>📍 Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
