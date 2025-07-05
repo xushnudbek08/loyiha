@@ -91,18 +91,28 @@
                         </div>
                         <div class="product-info">
                             <h3>{{ product.name }}</h3>
-                            <p>Xotira:{{ product.ssd}}gb</p>
-                            <p class="product-specs">{{ product.description }}</p>
+                            <p><strong>Xotira:</strong> {{ product.ssd}}gb</p> 
+                            <p><strong>Rangi:</strong> {{ product.color }}</p>
+                            <p><strong>Qancha sotib olish mumkin:</strong> {{ product.stock }}</p>
+                            <p class="product-specs">
+                               
                             <div class="product-price">
                                 <span class="current-price">{{ product.price }} so'm</span>
                             </div>
                             <a href="{% url 'checkout' %}" class="buy-btn">Xarid qilish</a>
+                             <a href="{% url 'product_detail' product.id %}" class="btn-details">Tavsifi</a>
+
                         </div>
                     </div>
                 {% empty %}
                     <p>Mahsulot topilmadi</p>
                 {% endfor %}
+            
+
+            
+            
             </div>
+
         </div>
     </section>
 

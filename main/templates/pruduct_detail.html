@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - PhoneShop</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body style="padding-top: 90px;">
+<header class="header">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{% url 'first_page' %}"><h1>📱 PhoneShop</h1></a>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+            <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+            <li><a href="{% url 'products' %}" class="active">Telefonlar</a></li>
+            <li><a href="{% url 'contact' %}">Aloqa</a></li>
+        </ul>
+        <div class="auth-buttons">
+            {% if user.is_authenticated %}
+                <span class="user-name">{{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn-login">Chiqish</a>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-login">Kirish</a>
+                <a href="{% url 'register' %}" class="btn-register">Ro'yxatdan o'tish</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
+
+<main>
+    <div class="container" style="margin-top:2rem;">
+        <div class="product-detail-card" style="display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap;background:#fff;border-radius:16px;box-shadow:0 4px 16px #0001;padding:2rem 1.5rem 1.5rem 1.5rem;">
+            <div style="flex:1;min-width:220px;text-align:center;">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width:220px;max-height:260px;border-radius:12px;box-shadow:0 2px 8px #007bff22;">
+            </div>
+            <div style="flex:2;min-width:250px;">
+                <h2 style="font-size:2rem;color:#007bff;margin-bottom:0.5rem;">{{ product.name }}</h2>
+                <div style="font-size:1.2rem;color:#333;margin-bottom:1rem;">{{ product.description }}</div>
+                <ul style="list-style:none;padding:0;margin-bottom:1.5rem;">
+                    <li><strong>Rangi:</strong> {{ product.color }}</li>
+                    <li><strong>Xotira:</strong> {{ product.ssd }}</li>
+                </ul>
+                <div style="font-size:1.5rem;font-weight:700;color:#28a745;margin-bottom:1.5rem;">{{ product.price }} so'm</div>
+                <a href="/checkout/" class="order-btn" style="display:inline-block;text-decoration:none;">🛒 Xarid qilish</a>
+            </div>
+        </div>
+
+        <section style="margin-top:2.5rem;">
+            <h3 style="color:#007bff;margin-bottom:1rem;">Izohlar</h3>
+            {% for comment in comments %}
+                <div style="background:#f8f9fa;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1rem;box-shadow:0 1px 4px #0001;">
+                    <div style="font-weight:600;color:#007bff;">{{ comment.user.username }}</div>
+                    <div style="margin:0.5rem 0 0.7rem 0;">{{ comment.text }}</div>
+                    {% if comment.image %}
+                        <img src="{{ comment.image.url }}" style="max-width:120px;border-radius:6px;box-shadow:0 1px 4px #0001;">
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>Hozircha izohlar yo‘q.</p>
+            {% endfor %}
+
+            {% if user.is_authenticated %}
+            <div style="margin-top:2rem;">
+                <h4 style="margin-bottom:0.7rem;">Izoh qoldirish:</h4>
+                <form method="POST" enctype="multipart/form-data" style="background:#fff;border-radius:8px;padding:1rem 1.2rem;box-shadow:0 1px 4px #0001;">
+                    {% csrf_token %}
+                    <textarea name="text" required placeholder="Izoh yozing..." style="width:100%;min-height:60px;border-radius:6px;border:1px solid #e1e5e9;padding:0.7rem;margin-bottom:0.7rem;"></textarea><br>
+                    <input type="file" name="image" style="margin-bottom:0.7rem;"><br>
+                    <button type="submit" class="order-btn" style="width:auto;">Yuborish</button>
+                </form>
+            </div>
+            {% else %}
+                <p>Izoh qoldirish uchun <a href="{% url 'login' %}">Kiring</a>.</p>
+            {% endif %}
+        </section>
+    </div>
+</main>
+
+<footer class="footer">   
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>📱 PhoneShop</h3>
+                <p>Eng yaxshi telefonlar va xizmatlar</p>
+            </div>
+            <div class="footer-section">
+                <h4>Sahifalar</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Bosh sahifa</a></li>
+                    <li><a href="{% url 'about' %}">Biz haqimizda</a></li>
+                    <li><a href="{% url 'products' %}">Telefonlar</a></li>
+                    <li><a href="{% url 'contact' %}">Aloqa</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Aloqa</h4>
+                <p>📞 +998 90 123 45 67</p>
+                <p>📧 info@phoneshop.uz</p>
+                <p>📍 Toshkent, O'zbekiston</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 PhoneShop. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

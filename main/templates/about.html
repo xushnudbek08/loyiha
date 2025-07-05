@@ -45,13 +45,31 @@
         <div class="container">
             <div class="story-content">
                 <div class="story-text">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     <h2>Bizning Hikoyamiz</h2>
-                    <p>PhoneShop 2018 yilda kichik oilaviy biznes sifatida boshlangan. Bizning maqsadimiz odamlarni eng yangi texnologiyalar bilan tanishtirishdir.</p>
+
+                    {%if biz%}
+                        <p>{{biz.text}}</p>
+                    {%else%}  
+                        <p> malumot topilmadi</p>
+                    {%endif%}
+
+
+
+
+                    <!-- <p>PhoneShop 2018 yilda kichik oilaviy biznes sifatida boshlangan. Bizning maqsadimiz odamlarni eng yangi texnologiyalar bilan tanishtirishdir.</p>
                     <p>Bugungi kunda biz O'zbekistonning eng yirik telefon do'konlaridan biriga aylandik. Bizda 50 dan ortiq telefon modeli mavjud va har kuni yuzlab mijozlarga xizmat ko'rsatamiz.</p>
-                    <p>Biz faqat original va sifatli mahsulotlarni sotamiz. Har bir telefon kafolat bilan birga keladi va bizning mutaxassislarimiz sizga eng yaxshi xizmatni ko'rsatadi.</p>
+                    <p>Biz faqat original va sifatli mahsulotlarni sotamiz. Har bir telefon kafolat bilan birga keladi va bizning mutaxassislarimiz sizga eng yaxshi xizmatni ko'rsatadi.</p> -->
                 </div>
                 <div class="story-image">
-                    <img src="/placeholder.svg?height=400&width=500" alt="Bizning do'kon">
+                    <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEroCqe5Y0mT-eFaF0_e1E6Wa9FZMYa738g&s" alt="Bizning do'kon">
                 </div>
             </div>
         </div>
@@ -110,19 +128,19 @@
             <h2>Bizning Jamoa</h2>
             <div class="team-grid">
                 <div class="team-member">
-                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbHnllNFt5qffNoIj8nSzx6OqXdpKieRJkHg&s" alt="Jamoa a'zosi">
                     <h3>Alisher Karimov</h3>
                     <p>Bosh direktor</p>
                     <p>10 yillik tajribaga ega telefon savdosi mutaxassisi</p>
                 </div>
                 <div class="team-member">
-                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8waganaYWrNRN3hcZXsxfPC_Vs0KSJBYCkA&s" alt="Jamoa a'zosi">
                     <h3>Nilufar Rahimova</h3>
                     <p>Savdo menejeri</p>
                     <p>Mijozlar bilan ishlash bo'yicha ekspert</p>
                 </div>
                 <div class="team-member">
-                    <img src="/placeholder.svg?height=200&width=200" alt="Jamoa a'zosi">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEByErvHg7lK8Eug8h0vjXBLveMlVXrNNBFQ&s" alt="Jamoa a'zosi">
                     <h3>Bobur Toshmatov</h3>
                     <p>Texnik mutaxassis</p>
                     <p>Telefonlarni ta'mirlash va texnik yordam</p>

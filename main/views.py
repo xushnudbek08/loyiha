@@ -4,10 +4,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib import messages
-from main.models import Product, Category, color, ssd
-
-
-
+from main.models import Product, Category, color, ssd,biz
+from .models import Comment
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, get_object_or_404
+from .models import Product, Comment
+from rest_framework import generics
+from .serializer  import ProductSerializer
 
 # Create your views here.
 def home(request):
@@ -19,7 +22,8 @@ def first_page(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    biz_haqida = biz.objects.first() # Assuming you have a single 'biz' object
+    return render(request, 'about.html',{'biz':biz_haqida})
 
 
 def contact(request):
@@ -78,9 +82,11 @@ def product_list(request):
     categories = Category.objects.all()
     colors = color.objects.all()
     ssds = ssd.objects.all()
+    # stocs = stock.objects.all()  # Bu noto'g'ri, stock modeli yo'q
     selected_category = request.GET.get('category')
     selected_color = request.GET.get('color')
     selected_ssd = request.GET.get('ssd')
+    selected_stocs = request.GET.get('stocs')
 
     products = Product.objects.all()
     if selected_category and selected_category != "all":
@@ -93,13 +99,49 @@ def product_list(request):
 
 
 
+
     text = {
         'products': products,
         'categories': categories,
         'colors': colors,
         'ssds': ssds,
+      
+        'selected_stocs': selected_stocs,
         'selected_category': selected_category,
         'selected_color': selected_color,
         'selected_ssd': selected_ssd
     }
     return render(request, 'products.html', text)
+
+
+
+
+
+def product_detail(request, pk):
+    product = get_object_or_404(Product, id=pk)
+    comments = Comment.objects.filter(product=product).order_by('-created_at')
+
+    if request.method == 'POST' and request.user.is_authenticated:
+        text = request.POST.get('text')
+        image = request.FILES.get('image')
+        Comment.objects.create(
+            product=product,
+            user=request.user,
+            text=text,
+            image=image
+
+
+
+        )
+        return redirect('product_detail', pk=product.id)
+
+    context = {
+        'product': product,
+        'comments': comments
+    }
+    return render(request, 'pruduct_detail.html', context)
+
+
+class product_api(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer 
